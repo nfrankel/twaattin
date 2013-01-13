@@ -1,4 +1,4 @@
-package com.packtpub.learnvaadin.twaattin;
+package com.packtpub.learnvaadin.twaattin.ui;
 
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Label;
