@@ -12,7 +12,7 @@
 		<servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
 		<init-param>
 			<param-name>UI</param-name>
-			<param-value>com.packtpub.learnvaadin.twaattin.TwaattinUI</param-value>
+			<param-value>com.packtpub.learnvaadin.twaattin.ui.TwaattinUI</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
