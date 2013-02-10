@@ -31,6 +31,8 @@
 		<!-- Compiler for custom widget sets. Should not be deployed -->
 		<dependency org="com.vaadin" name="vaadin-client-compiler"
 			rev="&vaadin.version;" conf="widgetset-compile->default" />
+			
+		<dependency org="org.twitter4j" name="twitter4j-core" rev="3.0.3" />
 	</dependencies>
 </ivy-module>
     
