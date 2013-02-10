@@ -2,14 +2,22 @@ package com.packtpub.learnvaadin.twaattin.ui;
 
 import static com.vaadin.server.Sizeable.Unit.PERCENTAGE;
 import static com.vaadin.ui.Alignment.MIDDLE_RIGHT;
+import static java.util.Locale.ENGLISH;
 
 import java.security.Principal;
 
 import com.packtpub.learnvaadin.twaattin.presenter.LogoutBehavior;
+import com.packtpub.learnvaadin.twaattin.presenter.TweetRefresherBehavior;
+import com.packtpub.learnvaadin.twaattin.ui.decorator.NameColumnGenerator;
+import com.packtpub.learnvaadin.twaattin.ui.decorator.ProfileImageColumnGenerator;
+import com.packtpub.learnvaadin.twaattin.ui.decorator.ScreenNameColumnGenerator;
+import com.packtpub.learnvaadin.twaattin.ui.decorator.SourceColumnDecorator;
+import com.packtpub.learnvaadin.twaattin.ui.decorator.TweetColumnDecorator;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 
 public class TimelineScreen extends VerticalLayout {
@@ -34,22 +42,27 @@ public class TimelineScreen extends VerticalLayout {
 
 		addComponent(menuBar);
 
-		fillTweets();
-	}
+		addComponentAttachListener(new TweetRefresherBehavior());
 
-	public void fillTweets() {
+		Table table = new Table();
 
-		for (int i = 0; i < 10; i++) {
+		table.setLocale(ENGLISH);
 
-			Label label = new Label();
+		addComponent(table);
 
-			label.setValue("Lorem ipsum dolor sit amet, consectetur "
-					+ "adipisicing elit, sed do eiusmod tempor incididunt "
-					+ "ut labore et dolore magna aliqua. Ut enim ad minim "
-					+ "veniam, quis nostrud exercitation ullamco laboris "
-					+ "nisi ut aliquip ex ea commodo consequat.");
+		table.addGeneratedColumn("source", new SourceColumnDecorator());
+		table.addGeneratedColumn("screenName", new ScreenNameColumnGenerator());
+		table.addGeneratedColumn("name", new NameColumnGenerator());
+		table.addGeneratedColumn("profileImage",
+				new ProfileImageColumnGenerator());
+		table.addGeneratedColumn("text", new TweetColumnDecorator());
 
-			addComponent(label);
-		}
+		table.setColumnHeader("source", "via");
+		table.setColumnHeader("screenName", "Screen name");
+		table.setColumnHeader("profileImage", "");
+		table.setColumnHeader("text", "Tweet");
+
+		table.setVisibleColumns(new Object[] { "text", "name", "screenName",
+				"profileImage", "createdAt", "source" });
 	}
 }
