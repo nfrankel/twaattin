@@ -9,4 +9,4 @@ build
 .settings
 rebel.xml
 twitter4j.properties
-.DS
+.DS_Store
