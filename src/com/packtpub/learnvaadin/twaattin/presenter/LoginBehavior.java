@@ -1,12 +1,11 @@
 package com.packtpub.learnvaadin.twaattin.presenter;
 
-import static com.vaadin.ui.Notification.Type.ERROR_MESSAGE;
-
 import java.security.Principal;
 
 import com.packtpub.learnvaadin.authentication.AuthenticationException;
 import com.packtpub.learnvaadin.authentication.TwitterAuthenticationStrategy;
 import com.packtpub.learnvaadin.twaattin.ui.TimelineScreen;
+import com.vaadin.server.SystemError;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -46,7 +45,7 @@ public class LoginBehavior implements ClickListener {
 
 		} catch (AuthenticationException e) {
 
-			Notification.show(e.getMessage(), ERROR_MESSAGE);
+			pinField.setComponentError(new SystemError(e));
 		}
 	}
 }

@@ -24,20 +24,13 @@ public class TwitterService {
 		return singleton;
 	}
 
-	public String getAuthenticationUrl() {
+	public String getAuthenticationUrl() throws TwitterException {
 
 		twitter.setOAuthAccessToken(null);
 
-		try {
+		requestToken = twitter.getOAuthRequestToken();
 
-			requestToken = twitter.getOAuthRequestToken();
-
-			return requestToken.getAuthenticationURL();
-
-		} catch (TwitterException e) {
-
-			throw new RuntimeException(e);
-		}
+		return requestToken.getAuthenticationURL();
 	}
 
 	public String authenticate(String pin) throws TwitterException {

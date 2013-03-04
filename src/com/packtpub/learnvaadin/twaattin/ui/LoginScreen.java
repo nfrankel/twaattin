@@ -1,8 +1,11 @@
 package com.packtpub.learnvaadin.twaattin.ui;
 
+import twitter4j.TwitterException;
+
 import com.packtpub.learnvaadin.service.TwitterService;
 import com.packtpub.learnvaadin.twaattin.presenter.LoginBehavior;
 import com.vaadin.server.ExternalResource;
+import com.vaadin.server.SystemError;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Link;
 import com.vaadin.ui.TextField;
@@ -23,8 +26,15 @@ public class LoginScreen extends VerticalLayout {
 
 		twitterLink.setCaption("Get PIN");
 		twitterLink.setTargetName("twitterauth");
-		twitterLink.setResource(new ExternalResource(TwitterService.get()
-				.getAuthenticationUrl()));
+
+		try {
+
+			twitterLink.setResource(new ExternalResource(TwitterService.get().getAuthenticationUrl()));
+
+		} catch (TwitterException e) {
+
+			twitterLink.setComponentError(new SystemError(e));
+		}
 
 		pinField.setInputPrompt("PIN");
 
