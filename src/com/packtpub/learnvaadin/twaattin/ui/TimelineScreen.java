@@ -32,13 +32,16 @@ public class TimelineScreen extends VerticalLayout {
 
 		menuBar.setWidth(100, PERCENTAGE);
 		menuBar.setComponentAlignment(button, MIDDLE_RIGHT);
+		menuBar.setMargin(true);
 
 		addComponent(menuBar);
 
 		addComponentAttachListener(new TweetRefresherBehavior());
 
-		VerticalLayout layout = new VerticalLayout();
+		VerticalLayout timeline = new VerticalLayout();
+		
+		timeline.addStyleName("p-timeline");
 
-		addComponent(layout);
+		addComponent(timeline);
 	}
 }

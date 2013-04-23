@@ -20,6 +20,8 @@ public class StatusComponent extends CustomComponent {
 
 	public StatusComponent(StatusDto dto) {
 
+		addStyleName("p-status-component");
+		
 		ExternalResource userPage = new ExternalResource(StatusConverter.TWITTER_USER_URL + dto.getScreenName());
 
 		Link name = new Link(dto.getName(), userPage);
