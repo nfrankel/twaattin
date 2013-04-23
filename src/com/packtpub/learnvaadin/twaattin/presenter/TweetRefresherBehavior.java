@@ -6,11 +6,13 @@ import twitter4j.Status;
 import twitter4j.TwitterException;
 
 import com.packtpub.learnvaadin.service.TwitterService;
-import com.vaadin.data.util.BeanItemContainer;
+import com.packtpub.learnvaadin.twaattin.ui.StatusComponent;
+import com.packtpub.learnvaadin.twaattin.ui.convert.StatusConverter;
+import com.packtpub.learnvaadin.twaattin.ui.convert.StatusDto;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HasComponents.ComponentAttachEvent;
 import com.vaadin.ui.HasComponents.ComponentAttachListener;
-import com.vaadin.ui.Table;
+import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
 public class TweetRefresherBehavior implements ComponentAttachListener {
@@ -20,20 +22,24 @@ public class TweetRefresherBehavior implements ComponentAttachListener {
 
 		Component component = event.getAttachedComponent();
 
-		if (component instanceof Table) {
+		if (component instanceof VerticalLayout) {
 
-			Table table = (Table) component;
+			VerticalLayout layout = (VerticalLayout) component;
 
 			try {
 
 				List<Status> statuses = TwitterService.get().getTweets();
 
-				BeanItemContainer<Status> container = new BeanItemContainer<Status>(
-						Status.class);
+				StatusConverter converter = new StatusConverter();
 
-				container.addAll(statuses);
+				for (Status status : statuses) {
 
-				table.setContainerDataSource(container);
+					StatusDto dto = converter.convert(status);
+
+					StatusComponent statusComponent = new StatusComponent(dto);
+					
+					layout.addComponent(statusComponent);
+				}
 
 			} catch (TwitterException e) {
 
