@@ -46,6 +46,6 @@ public class TwitterService {
 
 	public List<Status> getTweets() throws TwitterException {
 
-		return twitter.getUserTimeline();
+		return twitter.getHomeTimeline();
 	}
 }
