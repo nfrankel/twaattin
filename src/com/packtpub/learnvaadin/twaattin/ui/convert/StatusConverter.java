@@ -9,6 +9,7 @@ import java.util.List;
 import twitter4j.HashtagEntity;
 import twitter4j.Status;
 import twitter4j.URLEntity;
+import twitter4j.User;
 import twitter4j.UserMentionEntity;
 
 public class StatusConverter {
@@ -59,9 +60,20 @@ public class StatusConverter {
 
 		StatusDto dto = new StatusDto();
 
-		dto.setName(status.getUser().getName());
-		dto.setScreenName(status.getUser().getScreenName());
-		dto.setProfileImage(status.getUser().getProfileImageURL());
+		User user = null;
+		
+		if (status.isRetweet()) {
+			
+			user = status.getRetweetedStatus().getUser();
+
+		} else {
+			
+			user = status.getUser();
+		}
+		
+		dto.setName(user.getName());
+		dto.setScreenName(user.getScreenName());
+		dto.setProfileImage(user.getProfileImageURL());
 
 		createFragmentsWithUrl(fragments, status.getURLEntities());
 		createFragmentsWithTag(fragments, status.getHashtagEntities());
