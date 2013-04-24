@@ -59,21 +59,8 @@ public class StatusConverter {
 		List<TweetFragment> fragments = new ArrayList<>();
 
 		StatusDto dto = new StatusDto();
-
-		User user = null;
 		
-		if (status.isRetweet()) {
-			
-			user = status.getRetweetedStatus().getUser();
-
-		} else {
-			
-			user = status.getUser();
-		}
-		
-		dto.setName(user.getName());
-		dto.setScreenName(user.getScreenName());
-		dto.setProfileImage(user.getProfileImageURL());
+		fillInUserAndRetweet(status, dto);
 
 		createFragmentsWithUrl(fragments, status.getURLEntities());
 		createFragmentsWithTag(fragments, status.getHashtagEntities());
@@ -92,11 +79,36 @@ public class StatusConverter {
 			offset += fragment.getOffset();
 		}
 
-		dto.setText(builder.toString());
+		dto.setTweet(builder.toString());
 
 		return dto;
 	}
 
+	void fillInUserAndRetweet(Status status, StatusDto dto) {
+		
+		User user = null;
+		
+		if (status.isRetweet()) {
+			
+			user = status.getRetweetedStatus().getUser();
+
+			String url = TWITTER_USER_URL + user.getScreenName();
+
+			String href = "<a href='" + url + "'>";
+
+			dto.setRetweetedBy(href + user.getName() + "</a>");
+
+			
+		} else {
+			
+			user = status.getUser();
+		}
+		
+		dto.setName(user.getName());
+		dto.setScreenName(user.getScreenName());
+		dto.setProfileImage(user.getProfileImageURL());
+	}
+	
 	void createFragmentsWithUrl(List<TweetFragment> fragments, URLEntity[] entities) {
 
 		if (entities != null) {

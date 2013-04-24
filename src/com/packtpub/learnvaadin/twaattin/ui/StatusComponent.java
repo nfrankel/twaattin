@@ -44,7 +44,22 @@ public class StatusComponent extends CustomComponent {
 
 		actionsBar.setSpacing(true);
 
-		VerticalLayout rightSide = new VerticalLayout(names, tweet, actionsBar);
+		String retweetedBy = dto.getRetweetedBy();
+		
+		VerticalLayout rightSide;
+		
+		if (retweetedBy == null) {
+
+			rightSide = new VerticalLayout(names, tweet, actionsBar);
+			
+		} else {
+			
+			Label label = new Label("Retweeted by " + retweetedBy, HTML);
+			
+			label.addStyleName("p-retweeted-by");
+			
+			rightSide = new VerticalLayout(names, tweet, label, actionsBar);
+		}
 
 		rightSide.setSpacing(true);
 		rightSide.setWidth(450, PIXELS);

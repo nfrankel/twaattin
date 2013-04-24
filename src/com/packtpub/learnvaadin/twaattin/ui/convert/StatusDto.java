@@ -7,6 +7,7 @@ public class StatusDto {
 	private String screenName;
 	private String profileImage;
 	private String tweet;
+	private String retweetedBy;
 
 	public String getName() {
 		return name;
@@ -36,7 +37,15 @@ public class StatusDto {
 		this.profileImage = profileImage;
 	}
 
-	public void setText(String text) {
-		this.tweet = text;
+	public void setTweet(String tweet) {
+		this.tweet = tweet;
+	}
+
+	public String getRetweetedBy() {
+		return retweetedBy;
+	}
+
+	public void setRetweetedBy(String retweetedBy) {
+		this.retweetedBy = retweetedBy;
 	}
 }
