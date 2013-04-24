@@ -1,10 +1,26 @@
 @import "../reindeer/legacy-styles.css";
 
+.p-retweeted-by {
+	color: #999999;
+	cursor: pointer;
+}
+
+.p-retweeted-by a:link, .p-retweeted-by a:visited {
+	color: #999999;
+	text-decoration: none;
+}
+
+.p-retweeted-by a:hover {
+	color: #2970A6;
+	text-decoration: underline;
+}
+
+
 .v-link a:link span {
 	color: black;
 }
 
-.v-link a:hover span, .p-tweet a:link, .p-tweet a:visited {
+.v-link a:hover span, .p-tweet a:link, .p-tweet a:visited  {
 	color: #2970A6;
 }
 
