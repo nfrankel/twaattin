@@ -97,20 +97,31 @@ public class StatusConverter {
 		return dto;
 	}
 
-	void createFragmentsWithUrl(List<TweetFragment> fragments, URLEntity[] urls) {
+	void createFragmentsWithUrl(List<TweetFragment> fragments, URLEntity[] entities) {
 
-		if (urls != null) {
+		if (entities != null) {
 
-			for (URLEntity url : urls) {
+			for (URLEntity entity : entities) {
 
-				String expandedUrl = url.getExpandedURL();
+				String url = entity.getExpandedURL();
 
-				int start = url.getStart();
-				int end = url.getEnd();
+				int start = entity.getStart();
+				int end = entity.getEnd();
 
-				String href = "<a href='" + expandedUrl + "' target='_blank' + title='" + expandedUrl + "'>";
+				String protocollessUrl = null;
+				
+				if (url.startsWith("http://")) {
+					
+					protocollessUrl = url.substring(7);
 
-				TweetFragment fragment = new TweetFragment(start, end, href + url.getURL() + "</a>");
+				} else {
+					
+					protocollessUrl = url.substring(8);
+				}
+				
+				String href = "<a href='" + url + "' target='_blank' + title='" + url + "'>";
+
+				TweetFragment fragment = new TweetFragment(start, end, href + protocollessUrl + "</a>");
 
 				fragments.add(fragment);
 			}
