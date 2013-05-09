@@ -32,7 +32,11 @@
 		<dependency org="com.vaadin" name="vaadin-client-compiler"
 			rev="&vaadin.version;" conf="widgetset-compile->default" />
 			
+		<dependency org="com.vaadin" name="vaadin-push" rev="&vaadin.version;"
+			conf="default->default" />
+
 		<dependency org="org.twitter4j" name="twitter4j-core" rev="3.0.3" />
+		<dependency org="org.twitter4j" name="twitter4j-stream" rev="3.0.3" />
 	</dependencies>
 </ivy-module>
     
