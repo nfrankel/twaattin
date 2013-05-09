@@ -10,3 +10,4 @@ build
 rebel.xml
 twitter4j.properties
 .DS_Store
+log4j.properties
