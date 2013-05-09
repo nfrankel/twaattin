@@ -1,11 +1,7 @@
 package com.packtpub.learnvaadin.twaattin.presenter;
 
-import java.util.List;
-
 import twitter4j.Status;
-import twitter4j.TwitterException;
 
-import com.packtpub.learnvaadin.service.TwitterService;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HasComponents.ComponentAttachEvent;
@@ -15,6 +11,17 @@ import com.vaadin.ui.Table;
 @SuppressWarnings("serial")
 public class TweetRefresherBehavior implements ComponentAttachListener {
 
+	private BeanItemContainer<Status> container;
+
+	public void updatedStatus(Status status) {
+
+		if (container != null) {
+		
+			container.addBean(status);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public void componentAttachedToContainer(ComponentAttachEvent event) {
 
@@ -24,21 +31,7 @@ public class TweetRefresherBehavior implements ComponentAttachListener {
 
 			Table table = (Table) component;
 
-			try {
-
-				List<Status> statuses = TwitterService.get().getTweets();
-
-				BeanItemContainer<Status> container = new BeanItemContainer<Status>(
-						Status.class);
-
-				container.addAll(statuses);
-
-				table.setContainerDataSource(container);
-
-			} catch (TwitterException e) {
-
-				throw new RuntimeException(e);
-			}
+			container = (BeanItemContainer<Status>) table.getContainerDataSource();
 		}
 	}
 }

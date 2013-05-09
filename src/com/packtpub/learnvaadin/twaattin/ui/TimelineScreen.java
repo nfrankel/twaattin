@@ -6,6 +6,8 @@ import static java.util.Locale.ENGLISH;
 
 import java.security.Principal;
 
+import twitter4j.Status;
+
 import com.packtpub.learnvaadin.twaattin.presenter.LogoutBehavior;
 import com.packtpub.learnvaadin.twaattin.presenter.TweetRefresherBehavior;
 import com.packtpub.learnvaadin.twaattin.ui.decorator.NameColumnGenerator;
@@ -13,6 +15,7 @@ import com.packtpub.learnvaadin.twaattin.ui.decorator.ProfileImageColumnGenerato
 import com.packtpub.learnvaadin.twaattin.ui.decorator.ScreenNameColumnGenerator;
 import com.packtpub.learnvaadin.twaattin.ui.decorator.SourceColumnDecorator;
 import com.packtpub.learnvaadin.twaattin.ui.decorator.TweetColumnDecorator;
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
@@ -42,9 +45,15 @@ public class TimelineScreen extends VerticalLayout {
 
 		addComponent(menuBar);
 
-		addComponentAttachListener(new TweetRefresherBehavior());
+		TweetRefresherBehavior behavior = TwaattinUI.getCurrent().getTweetRefresherBehavior();
+
+		addComponentAttachListener(behavior);
 
 		Table table = new Table();
+
+		BeanItemContainer<Status> container = new BeanItemContainer<Status>(Status.class);
+
+		table.setContainerDataSource(container);
 
 		table.setLocale(ENGLISH);
 
