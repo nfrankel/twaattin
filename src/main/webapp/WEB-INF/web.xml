@@ -9,7 +9,7 @@
 	</context-param>
 	<servlet>
 		<servlet-name>Twaattin</servlet-name>
-		<servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
+		<servlet-class>com.packtpub.learnvaadin.osgi.FixOsgiClassLoaderVaadinServlet</servlet-class>
 		<init-param>
 			<param-name>UI</param-name>
 			<param-value>com.packtpub.learnvaadin.twaattin.ui.TwaattinUI</param-value>
