@@ -7,3 +7,6 @@ Twaattin is a Twitter client meant to showcase [Vaadin](https://vaadin.com) feat
 * [Chapter 6](https://github.com/nfrankel/twaattin/tree/chapter6) describes Table components. At this step, Twaattin displays tweets of the logged-in user in such a component.
 * [Chapter 7](https://github.com/nfrankel/twaattin/tree/chapter7) goes through Vaadin advanced features, and more specifically Server Push. Now, Twattin is enhanced with this push ability, so that newer tweets are automatically displayed with no user interaction.
 * [Chapter 9](https://github.com/nfrankel/twaattin/tree/chapter9) tells about custom component building. Twaattin tweet-displaying table is replaced by a tweet-displaying component.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/nfrankel/twaattin/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
